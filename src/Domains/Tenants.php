@@ -4,6 +4,7 @@ namespace ScolarisSdk\Domains;
 
 use ScolarisSdk\Models\Tenant;
 use ScolarisSdk\HttpApiClient;
+use ScolarisSdk\Models\Administrative;
 
 class Tenants
 {
@@ -11,11 +12,16 @@ class Tenants
         private HttpApiClient $httpApiClient
     ) {}
 
-    public function create(string $id, string $name): Tenant
+    public function create(string $id, string $name, Administrative $adminitrative): Tenant
     {
         $data = [
             'id' => $id,
             'name' => $name,
+            'administrative' => [
+                'name' => $adminitrative->getName(),
+                'last_name' => $adminitrative->getLastName(),
+                'email' => $adminitrative->getEmail(),
+            ],
         ];
 
         $tenantData = $this->httpApiClient->post("admin/tenants", $data);
