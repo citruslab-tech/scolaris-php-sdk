@@ -12,7 +12,7 @@ class Tenants
         private HttpApiClient $httpApiClient
     ) {}
 
-    public function create(string $id, string $name, Administrative $adminitrative): Tenant
+    public function create(string $id, string $name, Administrative $adminitrative, array $configs = []): Tenant
     {
         $data = [
             'id' => $id,
@@ -22,6 +22,7 @@ class Tenants
                 'last_name' => $adminitrative->getLastName(),
                 'email' => $adminitrative->getEmail(),
             ],
+            'configs' => $configs,
         ];
 
         $tenantData = $this->httpApiClient->post("admin/tenants", $data);
