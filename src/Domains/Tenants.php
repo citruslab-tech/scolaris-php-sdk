@@ -32,7 +32,7 @@ class Tenants
         $tenantData = $this->httpApiClient->post("admin/tenants", $data);
 
         return new Tenant(
-            $tenantData['subdomain'],
+            $tenantData['id'],
             $tenantData['name'],
             $tenantData['created_at'],
         );
