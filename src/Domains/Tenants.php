@@ -12,11 +12,15 @@ class Tenants
         private HttpApiClient $httpApiClient
     ) {}
 
-    public function create(string $id, string $name, Administrative $adminitrative, array $configs = []): Tenant
-    {
+    public function create(
+        string $name,
+        string $subdomain,
+        Administrative $adminitrative,
+        array $configs = []
+    ): Tenant {
         $data = [
-            'id' => $id,
             'name' => $name,
+            'subdomain' => $subdomain,
             'administrative' => [
                 'name' => $adminitrative->getName(),
                 'last_name' => $adminitrative->getLastName(),
@@ -28,7 +32,7 @@ class Tenants
         $tenantData = $this->httpApiClient->post("admin/tenants", $data);
 
         return new Tenant(
-            $tenantData['id'],
+            $tenantData['subdomain'],
             $tenantData['name'],
             $tenantData['created_at'],
         );

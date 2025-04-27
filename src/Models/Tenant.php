@@ -5,14 +5,14 @@ namespace ScolarisSdk\Models;
 class Tenant
 {
     public function __construct(
-        private string $id,
+        private string $subdomain,
         private string $name,
         private string $createdAt,
     ) {}
 
-    public function getId(): string
+    public function getSubdomain(): string
     {
-        return $this->id;
+        return $this->subdomain;
     }
 
     public function getName(): string
@@ -28,7 +28,7 @@ class Tenant
     public function toArray(): array
     {
         return [
-            'id' => $this->id,
+            'subdomain' => $this->subdomain,
             'name' => $this->name,
             'created_at' => $this->createdAt,
         ];
